@@ -54,11 +54,20 @@ All examples are cells of one notebook, [Tractor_Trailer_Experiments.ipynb](Trac
 | Figures | SVG error and state figures for the four scenarios | notebook §5; [truck_trailer/figures.py](truck_trailer/figures.py) → `figures_svg/`, `figures_svg_states/` | yes | no |
 
 ### Preconditions
-
+- **Your design-model dynamics are in, or can be brought into, a chain
+  (strict-feedback) form suitable for backstepping.** This is the requirement
+  of the method. If your model already has that chain structure, use it
+  directly: no transformation is needed. Otherwise it has to be transformed.
+  The method applies to single-input and
+  multi-input dynamics, and to linear and some nonlinear dynamics. For
+  **linear** dynamics it is guaranteed by controllability. **Nonlinear**
+  dynamics that are not already in chain form need stricter transformability conditions, typically geometric
+  conditions such as involutivity of the associated distributions, which
+  controllability alone does not ensure.
+  The controller is derived from this design model, and the GP only learns
+  the remainder.
 - **Full state measured.** The full state of the high-fidelity model must be available: lateral path error, heading error, lateral velocity, tractor and trailer yaw rates, articulation angle and longitudinal speed.
-- **Derivatives for online learning.** The learning target is the state derivative minus the linear-model prediction, so a real application must supply these derivatives. In this repository they come from the simulator. <!-- inferred, please verify -->
-- **Single-input, controllable, minimum-phase model.** You need a linear design model with one control input that is controllable (`strict_feedback_form` raises an error otherwise, [truck_trailer/strict_feedback.py:36](truck_trailer/strict_feedback.py#L36)). The input-to-tracked-output map must be minimum phase with relative degree 2 (`design_reference_filter` raises an error otherwise, [truck_trailer/controller.py:79-84](truck_trailer/controller.py#L79-L84)).
-- **One operating point.** The design is linearised at a single speed (10 m/s), and the GP is pre-trained on 9.5–10.5 m/s. To operate over a speed range, the linear-model parameters must be computed per operating-point interval and supplied to the controller. That scheduling is not implemented here; only the per-speed model builder exists (`make_manifold_fn` in [truck_trailer/lf_model.py](truck_trailer/lf_model.py)).
+- **One operating point.** The design is made at a single speed (10 m/s), and the GP is pre-trained on 9.5–10.5 m/s. To operate over a speed range, the linear-model parameters must be computed per operating-point interval and supplied to the controller. That scheduling is not implemented here; only the per-speed model builder exists (`make_manifold_fn` in [truck_trailer/lf_model.py](truck_trailer/lf_model.py)).
 - **Initial residual dataset.** You need an initial residual dataset to pre-train the GP. Here it is generated from the high-fidelity plant model around the steady-cornering manifold (`generate_residual_dataset`).
 - **Path information.** Path curvature and heading at the vehicle's projection point must be available to the controller.
 
