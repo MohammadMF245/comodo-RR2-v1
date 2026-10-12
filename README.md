@@ -17,7 +17,7 @@ examples are added or removed.
 ### Identity
 
 - **One-line summary:** Learn, while the controller runs, the mismatch between a low-fidelity model and the real dynamics, and compensate it inside a model-based steering controller. Shown on lateral path following of a tractor-semitrailer with an unknown road bank. (Command-filtered backstepping on a linear model in strict-feedback form, plus a semi-parametric online sparse Gaussian process that learns the model residual.)
-- **Role:** method library. The generic parts are the strict-feedback transform for a SISO linear system ([truck_trailer/strict_feedback.py](truck_trailer/strict_feedback.py)) and the semi-parametric online sparse GP ([truck_trailer/spgp.py](truck_trailer/spgp.py)). The tractor-semitrailer is the worked example.
+- **Role:** method library. The generic parts are the strict-feedback transform for a SISO linear system ([truck_trailer/strict_feedback.py](truck_trailer/strict_feedback.py)) and the semi-parametric online sparse GP ([truck_trailer/spgp.py](truck_trailer/spgp.py)). The tractor-trailer is the worked example.
 - **Maturity:** simulation only. No hardware interface exists in the repository.
 - **Maintainer / lab:** Mohammad Mahmoudi Filabadi, D2Lab, Ghent University (UGent).
 - **Licence / availability:** no licence file in the repository; the maintainer has not stated one. Contact the maintainer.
