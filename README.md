@@ -65,11 +65,8 @@ All examples are cells of one notebook, [Tractor_Trailer_Experiments.ipynb](Trac
 ### Not suitable when
 
 - **The full state vector is not directly measurable.** Add a state estimator first; none is provided here. Robustness to estimated rather than true states has not been tested.
-- **You need the GP's predictive uncertainty for safety monitoring or chance constraints.** Don't rely on it. In the transient scenarios the variance is badly over-confident: RMS z-score 3.6–10.6 against an ideal of 1 (notebook §4 output, `print_gp_reliability`).
-- **The model has several control inputs, or cannot be brought into single-input strict-feedback form.** Examples are a steered trailer axle or differential braking. Only the SISO case is implemented.
-- **The steering-to-path-error output is non-minimum-phase.** The stable-inversion reference filter rejects such designs ([truck_trailer/controller.py:83](truck_trailer/controller.py#L83)).
 
-Not exercised anywhere in this repository, so neither a limit nor a capability: measurement noise, sensor delay, operation far from 10 m/s, and deviations larger than about 0.5 m from the path.
+Not exercised anywhere in this repository, so neither a limit nor a capability: measurement noise, and sensor delay.
 
 ### Dependencies beyond this repository
 
