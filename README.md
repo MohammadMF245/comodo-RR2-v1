@@ -16,7 +16,7 @@ examples are added or removed.
 
 ### Identity
 
-- **One-line summary:** Learn, while the controller runs, the mismatch between a low-fidelity model and the real dynamics, and compensate it inside a model-based steering controller. Shown on lateral path following of a tractor-semitrailer with an unknown road bank. (Command-filtered backstepping on a linear model in strict-feedback form, plus a semi-parametric online sparse Gaussian process that learns the model residual.)
+- **One-line summary:** Learn, while the controller runs, the mismatch between a low-fidelity model and the real dynamics, and compensate it inside a model-based steering controller. Shown on lateral path following of a tractor-trailer with an unknown road bank. (Command-filtered backstepping on a linear model in strict-feedback form, plus a semi-parametric online sparse Gaussian process that learns the model residual.)
 - **Role:** method library. The generic parts are the strict-feedback transform for a SISO linear system ([truck_trailer/strict_feedback.py](truck_trailer/strict_feedback.py)) and the semi-parametric online sparse GP ([truck_trailer/spgp.py](truck_trailer/spgp.py)). The tractor-trailer is the worked example.
 - **Maturity:** simulation only. No hardware interface exists in the repository.
 - **Maintainer / lab:** Mohammad Mahmoudi Filabadi, D2Lab, Ghent University (UGent).
@@ -26,7 +26,7 @@ examples are added or removed.
 
 n/a for hardware, because this is a method library and simulation only. For reference, the simulated system in the worked example is:
 
-- **System under control:** tractor-semitrailer, nonlinear 10-state planar model with tractor and trailer yaw, articulation, and Fiala / Pacejka / linear / saturated tire models ([truck_trailer/hf_model.py](truck_trailer/hf_model.py), [truck_trailer/tires.py](truck_trailer/tires.py)). Nominal parameters: tractor 5760 kg, trailer 6665 kg, hitch-to-trailer-axle 10 m ([truck_trailer/params.py](truck_trailer/params.py)).
+- **System under control:** tractor-trailer, nonlinear 10-state planar model with tractor and trailer yaw, articulation, and Fiala / Pacejka / linear / saturated tire models ([truck_trailer/hf_model.py](truck_trailer/hf_model.py), [truck_trailer/tires.py](truck_trailer/tires.py)). Nominal parameters: tractor 5760 kg, trailer 6665 kg, hitch-to-trailer-axle 10 m ([truck_trailer/params.py](truck_trailer/params.py)).
 - **Actuation:** front steering angle δ [rad] (lateral loop); front traction force F_xf [N] (speed loop, feedback-linearising).
 - **Sensing:** the controller uses the full plant state with no noise and no delay: lateral path error, heading error, tractor lateral velocity, tractor and trailer yaw rates, articulation angle and longitudinal speed. The online-learning target is a state derivative minus the linear model; in this repository it is taken directly from the simulator ([truck_trailer/closed_loop.py:173](truck_trailer/closed_loop.py#L173)).
 - **Sample rates:** fixed-step RK4 at dt = 5 ms (200 Hz). GP evaluated every 4 steps (50 Hz). Online GP update every 20 steps (10 Hz). Values from the notebook and from `DEFAULT_GP_OPTS` in [truck_trailer/scenarios.py](truck_trailer/scenarios.py).
