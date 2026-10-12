@@ -51,7 +51,7 @@ All examples are cells of one notebook, [Tractor_Trailer_Experiments.ipynb](Trac
 | Scenario 1: figure eight, mass/inertia mismatch | Plant masses and yaw inertias scaled by 1.3 (tractor) and 1.7 (trailer) against the nominal design; no GP vs offline GP vs online GP | notebook §4, first cell | yes | no |
 | Scenarios 2–3: U-turn (R = 60 m) and lane change (3.5 m in 40 m), unknown bank 0.1 rad | Online GP learns an unmeasured road bank; compared with no GP and with bank feedforward | notebook §4, second cell | yes | no |
 | Scenario 4: straight line, bank 0.1 rad, start at 13 m/s (ref 10 m/s) | Bank plus speed transient; GP aware/unaware; speed loop on/off | notebook §4, second cell | yes | no |
-| Publication figures | SVG error and state figures for the four scenarios | notebook §5; [truck_trailer/figures.py](truck_trailer/figures.py) → `figures_svg/`, `figures_svg_states/` | yes | no |
+| Figures | SVG error and state figures for the four scenarios | notebook §5; [truck_trailer/figures.py](truck_trailer/figures.py) → `figures_svg/`, `figures_svg_states/` | yes | no |
 
 ### Preconditions
 
